@@ -1,10 +1,10 @@
-<div>
-  <mat-card>
-    <mat-card-title>
-      titlu
-    </mat-card-title>
-    <mat-card-content>
-      test
-    </mat-card-content>
-  </mat-card>
-</div>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="true" [fixedTopGap]="0"
+    [fixedBottomGap]="0">
+    <app-filters [filtersList]="genres"></app-filters>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-movies [moviesList]="moviesList"></app-movies>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,30 +1,42 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './shared/material-module/material-module';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import {
-    DateAdapter,
-    MatNativeDateModule,
-    NativeDateAdapter,
-    MAT_DATE_FORMATS,
-    MatDateFormats
+  DateAdapter,
+  MatNativeDateModule,
+  NativeDateAdapter,
+  MAT_DATE_FORMATS,
+  MatDateFormats
 } from '@angular/material';
 import {
-    MatDialogModule
+  MatDialogModule
 } from '@angular/material/dialog';
 import { HttpModule, Http } from '@angular/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
-
+import { TokenService } from './auth/service/token.service';
+import { MoviesComponent } from './modules/movies/movies.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FiltersComponent } from './modules/filters/filters.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MoviesComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,
-    MaterialModule
+    MaterialModule,
+    HttpModule,
+    HttpClientModule,
+    FlexLayoutModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [TokenService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

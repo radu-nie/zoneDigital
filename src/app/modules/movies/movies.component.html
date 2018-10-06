@@ -1,0 +1,21 @@
+<div fxLayout="column">
+  <div fxLayout="row wrap" fxLayoutGap="5" fxFlexAlign="center" fxLayoutAlign="space-evenly stretch">
+    <mat-card fxFlex="18" *ngFor="let movie of movies" [class.mat-elevation-z8]="movie.hover" (mouseover)="movie.hover=true"
+      (mouseout)="movie.hover = false;">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{movie.title}} {{movie.popularity}}</mat-card-title>
+        <mat-card-subtitle>
+          <span>Voturi: {{movie.vote_average}}</span>
+          <span>Total: {{movie.vote_count}}</span>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Photo of a Shiba Inu" />
+      <mat-card-content>
+        <p>
+          {{movie.overview}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
