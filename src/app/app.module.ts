@@ -1,10 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './shared/material-module/material-module';
+
+import {
+    DateAdapter,
+    MatNativeDateModule,
+    NativeDateAdapter,
+    MAT_DATE_FORMATS,
+    MatDateFormats
+} from '@angular/material';
+import {
+    MatDialogModule
+} from '@angular/material/dialog';
 import { HttpModule, Http } from '@angular/http';
 
 import { AppComponent } from './app.component';
-
 
 @NgModule({
   declarations: [
