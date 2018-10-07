@@ -1,20 +1,3 @@
-<!-- <div>
-  <div>
-    <mat-card *ngFor="let movie of movies" [class.mat-elevation-z8]="movie.hover" (mouseover)="movie.hover=true"
-      (mouseout)="movie.hover = false;">
-      <mat-card-header>
-        <mat-card-title>{{movie.title}}</mat-card-title>
-        <mat-card-subtitle>
-          genre: {{movie.genre_ids}}
-        </mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Photo of a Shiba Inu" />
-
-    </mat-card>
-  </div>
-</div> -->
-
-
 <mat-grid-list cols="5" rowHeight="230px" gutterSize="20">
   <mat-grid-tile *ngFor="let movie of movies" [class.mat-elevation-z8]="movie.hover" (mouseover)="movie.hover=true"
     (mouseout)="movie.hover = false;" [colspan]="1" [rowspan]="2">
@@ -26,9 +9,8 @@
             {{genre.name}}
           </span>
         </mat-card-subtitle>
-      </mat-card-header> <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Photo of a Shiba Inu" />
+      </mat-card-header> <img mat-card-image [src]="moviedbImageUrl + movie.poster_path" alt="Photo of a Shiba Inu" />
 
     </mat-card>
-
   </mat-grid-tile>
 </mat-grid-list>

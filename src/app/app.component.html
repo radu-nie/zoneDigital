@@ -2,7 +2,7 @@
   <button mat-fab color="primary">Primary</button>
   <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="true" [fixedTopGap]="0"
     [fixedBottomGap]="0">
-    <app-filters [filtersList]="genres" (filtersEvent)="recieveFilters($event)"></app-filters>
+    <app-filters [filtersList]="genres" (filtersEvent)="recieveGenreFilters($event)"></app-filters>
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -14,7 +14,7 @@
     </mat-grid-list>
     <app-movies [moviesList]="moviesListFiltered" [genresList]="genres"></app-movies>
 
-    <mat-paginator [length]="length" [pageSize]="pageSize" (page)="pageEvent = getNowPlaying($event)">
+    <mat-paginator [length]="length" [pageSize]="pageSize" (page)="pageEvent = getMovies($event)">
     </mat-paginator>
   </mat-sidenav-content>
 

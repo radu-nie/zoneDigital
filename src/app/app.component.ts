@@ -1,74 +1,81 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ThemoviedbService } from './shared/service/themoviedb.service';
+import { TheMovieDBService } from './shared/service/themoviedb.service';
 import { PageEvent } from '@angular/material';
-import { Observable } from 'rxjs';
-import { Movie } from './shared/common/movie';
-
-const FILTER_TYPE = {
-  "RATING": 1,
-  "GENRE": 2
-};
+import { AppSettings, FILTER_TYPE } from './constants/constants';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [ThemoviedbService]
+  providers: [TheMovieDBService]
 })
 export class AppComponent implements OnInit {
-  moviesList: any = [];
-  moviesListFiltered: any = [];
-  currentMovies: any = [];
-  genres: any = [];
-  length = 0;
-  pageSize = 20;
-  ratingFilterValue: any = 3;
-  newMovieFilters: Array<any> = [];
+  public moviesList: Array<any>;
+  public moviesListFiltered: Array<any>;
+  public currentMovies: Array<any>;
+  public genres: Array<any>;
+  public newMovieFilters: Array<any>;
+
+  public length: number;
+  public pageSize: number;
+  public ratingFilterValue: number;
 
   private uniqueGenresIds: Array<number>;
 
-  constructor(private dataService: ThemoviedbService) {
+  constructor(private tmdbService: TheMovieDBService) {
+    // Default initalization
     this.moviesList = [];
     this.moviesListFiltered = [];
     this.currentMovies = [];
     this.uniqueGenresIds = [];
+    this.genres = [];
+    this.newMovieFilters = [];
+
+    this.length = 0;
+    this.pageSize = 20;
+    this.ratingFilterValue = 3;
   }
 
   ngOnInit() {
+    // First action
     this.getMovies(null);
-    this.getGenres();
   }
-  //REMEMBER: PAGINATION does not include filtering!! not suported by api
-  getMovies(pageEvent: PageEvent) {
 
-    this.dataService.getMovies(pageEvent ? (pageEvent.pageIndex + 1 + '') : null).subscribe(data => {
-      this.moviesList = this.sort(data.results, 'popularity');
-      this.moviesListFiltered = this.sort(data.results, 'popularity');
+  // REMEMBER: PAGINATION does not include filtering!! not suported by api
+  getMovies(pageEvent: PageEvent) {
+    this.tmdbService.getMovies(pageEvent ? (pageEvent.pageIndex + 1 + '') : null).subscribe(data => {
+      let sortedData = this.sort(data.results, 'popularity');
+      this.moviesList = sortedData;
+      this.moviesListFiltered = sortedData;
       // Set length for paginator
       this.length = data.total_results;
 
-      data.results.map(movie => {
+      sortedData.map(movie => {
+        // Add all genre id's available
         this.uniqueGenresIds.push(...movie.genre_ids);
       });
-
+      // Setter for uniqueGeneres filtrered by available movies genres
       this.uniqueGenresIds = [...new Set(this.uniqueGenresIds)];
-
+      // Get genres after movies to map needed info
+      this.getGenres();
     });
   }
 
   getGenres() {
-    this.dataService.getGeneres().subscribe(data => {
-
+    this.tmdbService.getGeneres().subscribe(data => {
+      // Select only available movie genres from dataset
       let uniqueGenres = data.genres.filter(element => {
+        // Check for existence in movie object -> genre_ids
         return this.uniqueGenresIds.includes(element.id);
       });
+      // Setter for genres -> also triggers input on filters check filters component
       this.genres = uniqueGenres;
     });
 
   }
 
   // Method triggered by emitter
-  recieveFilters($event) {
+  recieveGenreFilters($event) {
     this.newMovieFilters = [];
 
     $event.forEach(filter => {
@@ -76,28 +83,30 @@ export class AppComponent implements OnInit {
       this.newMovieFilters.push(filter.value.id);
     });
 
-    this.applyFilter(FILTER_TYPE.GENRE, this.newMovieFilters);
-    this.applyFilter(FILTER_TYPE.RATING, this.ratingFilterValue);
-
-    this.moviesListFiltered = this.currentMovies;
+    this.applyFilters();
   }
 
   ratingFilter($event) {
+    // Setter for filters
     this.ratingFilterValue = $event.value;
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    // Apply filters in this order (Genre, Rating)
     this.applyFilter(FILTER_TYPE.GENRE, this.newMovieFilters);
     this.applyFilter(FILTER_TYPE.RATING, this.ratingFilterValue);
-
     this.moviesListFiltered = this.currentMovies;
   }
 
-  applyFilter(type, filteringOptions: any) {
+  applyFilter(type: FILTER_TYPE, filteringOptions: any) {
     switch (type) {
-      case 2:
+      case FILTER_TYPE.GENRE.valueOf():
         if (filteringOptions instanceof Array) {
           this.filterMovieList(filteringOptions);
         }
         break;
-      case 1:
+      case FILTER_TYPE.RATING.valueOf():
         this.filterByRating();
         break;
       default:
@@ -106,25 +115,23 @@ export class AppComponent implements OnInit {
   }
 
   filterByRating() {
-
+    // Reset filtered movies if no current movies
     if (this.currentMovies.length == 0) {
       this.moviesListFiltered = this.moviesList;
     }
+    // Create temporary variable that currentMovies will be filtered
     let temp = this.currentMovies.filter(movie => {
       return movie.vote_average >= this.ratingFilterValue;
     });
-
+    // Set current movies
     this.currentMovies = temp;
   }
 
   filterMovieList(newMovieFilters: any[]) {
-    // Reset filtered movies
-    //this.moviesListFiltered = [];
-
+    // Reset filtered movies if no current movies
     if (this.currentMovies.length == 0) {
       this.moviesListFiltered = this.moviesList;
     }
-
     // Filter movies genres to intersect with filters
     this.currentMovies = this.moviesList.filter(movie => {
       //intersect values 

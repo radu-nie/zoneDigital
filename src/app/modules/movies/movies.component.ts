@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Movie } from '../../shared/common/movie';
+import { AppSettings } from '../../constants/constants';
+
 
 @Component({
   selector: 'app-movies',
@@ -7,9 +9,12 @@ import { Movie } from '../../shared/common/movie';
   styleUrls: ['./movies.component.css'],
   providers: []
 })
-export class MoviesComponent implements OnInit {
+
+
+export class MoviesComponent implements OnInit, OnChanges {
   private movies: Array<Movie>;
   private genres: any;
+  public moviedbImageUrl = AppSettings.MOVIEDB_IMAGE_URL;
 
   @Input()
   set moviesList(moviesList: Array<Movie>) {
@@ -35,21 +40,13 @@ export class MoviesComponent implements OnInit {
       this.movies.forEach(movie => {
         movie.genres = [];
         movie.genre_ids.forEach(id => {
-
-
           let index = genres.findIndex(function (genre) {
             return genre.id === id;
           });
 
           movie.genres.push(genres[index]);
-          /*
-          movie.genres.push(genres.filter(genre => {
-            return genre.id === id;
-          }));
-          */
         });
       })
     }
-
   }
 }

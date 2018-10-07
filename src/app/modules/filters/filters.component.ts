@@ -20,17 +20,5 @@ export class FiltersComponent implements OnInit {
   }
   onselectedFiltersControlChanged(value: any) {
     this.filtersEvent.emit(value.selectedOptions.selected);
-
-  }
-  formatLabel(value: number | null) {
-    if (!value) {
-      return 0;
-    }
-
-    if (value >= 1000) {
-      return Math.round(value / 1000) + 'k';
-    }
-
-    return value;
   }
 }
