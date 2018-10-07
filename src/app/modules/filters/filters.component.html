@@ -1,5 +1,5 @@
 <mat-selection-list #selectedFilters>
-  <mat-list-option *ngFor="let filter of filters">
+  <mat-list-option *ngFor="let filter of filters" (click)="onselectedFiltersControlChanged(selectedFilters)" [value]="filter">
     {{filter.name}}
   </mat-list-option>
 </mat-selection-list>

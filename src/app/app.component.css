@@ -10,3 +10,7 @@
   justify-content: center;
   width: 200px;
 }
+
+mat-slider {
+  background-color: #fff;
+}
