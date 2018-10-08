@@ -1,4 +1,11 @@
 <mat-selection-list #selectedFilters>
+  <mat-card>
+    <mat-card-subtitle>
+      Rating {{ratingValue}}
+    </mat-card-subtitle>
+    <mat-slider thumbLabel min="0" max="10" step=".5" [value]="ratingValue" (change)="ratingFilterEmitter($event)"></mat-slider>
+  </mat-card>
+
   <mat-list-option *ngFor="let filter of filters" (click)="onselectedFiltersControlChanged(selectedFilters)" [value]="filter">
     {{filter.name}}
   </mat-list-option>

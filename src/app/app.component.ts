@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TheMovieDBService } from './shared/service/themoviedb.service';
 import { PageEvent } from '@angular/material';
 import { AppSettings, FILTER_TYPE } from './constants/constants';
+import { Movie } from './shared/common/movie';
+import { Genre } from './shared/common/genre';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +11,14 @@ import { AppSettings, FILTER_TYPE } from './constants/constants';
   styleUrls: ['./app.component.css'],
   providers: [TheMovieDBService]
 })
-export class AppComponent implements OnInit {
-  public moviesList: Array<any>;
-  public moviesListFiltered: Array<any>;
-  public currentMovies: Array<any>;
-  public genres: Array<any>;
-  public newMovieFilters: Array<any>;
 
+export class AppComponent implements OnInit {
+  public moviesList: Array<Movie>;
+  public moviesListFiltered: Array<Movie>;
+  public currentMovies: Array<Movie>;
+  public genres: Array<Genre>;
+  public newMovieFilters: Array<any>;
+  public sidenavOpened: boolean;
   public length: number;
   public pageSize: number;
   public ratingFilterValue: number;
@@ -34,6 +37,8 @@ export class AppComponent implements OnInit {
     this.length = 0;
     this.pageSize = 20;
     this.ratingFilterValue = 3;
+
+    this.sidenavOpened = true;
   }
 
   ngOnInit() {
@@ -44,6 +49,11 @@ export class AppComponent implements OnInit {
   // REMEMBER: PAGINATION does not include filtering!! not suported by api
   getMovies(pageEvent: PageEvent) {
     this.tmdbService.getMovies(pageEvent ? (pageEvent.pageIndex + 1 + '') : null).subscribe(data => {
+      // Add genres to movies
+      data.results.map(resp => {
+        resp.genres = [];
+      });
+
       let sortedData = this.sort(data.results, 'popularity');
       this.moviesList = sortedData;
       this.moviesListFiltered = sortedData;
@@ -56,8 +66,9 @@ export class AppComponent implements OnInit {
       });
       // Setter for uniqueGeneres filtrered by available movies genres
       this.uniqueGenresIds = [...new Set(this.uniqueGenresIds)];
-      // Get genres after movies to map needed info
+      // Get genres after movies to map needed info      
       this.getGenres();
+
     });
   }
 
@@ -87,8 +98,8 @@ export class AppComponent implements OnInit {
   }
 
   ratingFilter($event) {
-    // Setter for filters
-    this.ratingFilterValue = $event.value;
+    // Setter for filters    
+    this.ratingFilterValue = $event;
     this.applyFilters();
   }
 

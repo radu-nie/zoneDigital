@@ -14,3 +14,64 @@
 mat-slider {
   background-color: #fff;
 }
+
+.mat-paginator {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  left: 0px;
+}
+
+.mat-paginator-container {
+  padding: 0 28px !important;
+}
+
+.mat-grid-title {
+  background: white;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+}
+
+.mat-grid-title[_ngcontent-c0] {
+  background: white;
+  position: fixed;
+  top: 0px;
+  z-index: 1;
+  right: 0px;
+  left: auto;
+  border-bottom: 2px solid #ffd73f;
+  padding: 20px 20px 0px 0px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
+  display: block;
+}
+
+.mat-grid-title[_ngcontent-c0][_ngcontent-c0] .mat-slider[_ngcontent-c0] {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 56px;
+  padding: 0 8px;
+  flex-wrap: wrap-reverse;
+}
+
+.mat-slider-thumb-label {
+  transform: rotate(45deg) !important;
+  border-radius: 50% 50% 0 !important;
+}
+
+.mat-slider-thumb {
+  transform: scale(0) !important;
+}
+
+.mat-slider-thumb-label-text {
+  opacity: 1 !important;
+}
+
+.filters-btn {
+  position: absolute;
+  z-index: 2;
+  left: 40px;
+  top: 15px;
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Movie } from '../../shared/common/movie';
 import { AppSettings } from '../../constants/constants';
+import { Genre } from '../../shared/common/genre';
 
 
 @Component({
@@ -11,19 +12,27 @@ import { AppSettings } from '../../constants/constants';
 })
 
 
-export class MoviesComponent implements OnInit, OnChanges {
+export class MoviesComponent implements OnInit {
   private movies: Array<Movie>;
-  private genres: any;
+  private genres: Array<Genre>;
   public moviedbImageUrl = AppSettings.MOVIEDB_IMAGE_URL;
 
   @Input()
   set moviesList(moviesList: Array<Movie>) {
     this.movies = moviesList;
+    this.mapGenresToMovies();
+  }
+  get movieList(): Array<Movie> {
+    return this.movies;
   }
 
   @Input()
-  set genresList(genresList: any) {
+  set genresList(genresList: Array<Genre>) {
     this.genres = genresList;
+    this.mapGenresToMovies();
+  }
+  get genresList(): Array<Genre> {
+    return this.genres;
   }
 
   constructor() {
@@ -32,13 +41,12 @@ export class MoviesComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() { }
-  ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
+
+  mapGenresToMovies() {
     if (this.movies.length > 0 && this.genres.length > 0) {
       let genres = this.genres;
       this.movies.forEach(movie => {
-        movie.genres = [];
+        //movie.genres = [];
         movie.genre_ids.forEach(id => {
           let index = genres.findIndex(function (genre) {
             return genre.id === id;

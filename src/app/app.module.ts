@@ -16,12 +16,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { MoviesComponent } from './modules/movies/movies.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material';
 import { FiltersComponent } from './modules/filters/filters.component';
+import { GetGenreNamePipe } from './shared/pipe/getGenreName';
 @NgModule({
   declarations: [
     AppComponent,
     MoviesComponent,
-    FiltersComponent
+    FiltersComponent,
+    GetGenreNamePipe
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { FiltersComponent } from './modules/filters/filters.component';
     HttpModule,
     HttpClientModule,
     FlexLayoutModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

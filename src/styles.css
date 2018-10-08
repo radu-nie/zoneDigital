@@ -2,9 +2,78 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 html {
-  background-color: #111111;
+  /* background-color: #111111; */
 }
 
-.mat-drawer-container {
+
+.mat-drawer-content {
   background-color: #111111;
+  background-image: url('assets/img/low_theatre.jpg');
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+}
+
+app-movies .mat-card {
+  background: #222;
+  color: rgba(255, 255, 255, 0.87);
+  transition: all .5s ease;
+  padding: 24px 24px 0px;
+}
+
+app-movies .mat-card:hover,
+app-movies .mat-card:focus {
+  background: rgb(105, 105, 105);
+}
+
+app-movies .mat-card .mat-card-subtitle {
+  color: #888;
+}
+
+app-movies .mat-card img,
+app-movies .mat-card img {
+  transition: all .8s ease;
+}
+
+app-movies .mat-card:hover img,
+app-movies .mat-card:focus img {
+  opacity: 0.5;
+}
+
+mat-sidenav[_ngcontent-c0] {
+  background-color: rgba(86, 86, 86, 0.45);
+  transition: all .8 ease;
+}
+
+.mat-selection-list .mat-list-option {
+  color: rgb(255, 215, 63);
+}
+
+.mat-selection-list mat-card {
+  background: rgba(255, 255, 255, 0);
+}
+
+.mat-selection-list mat-card .mat-card-subtitle {
+  color: rgb(255, 215, 63);
+}
+
+.mat-pseudo-checkbox {
+  color: inherit;
+}
+
+.mat-pseudo-checkbox::after {
+  color: #111111;
+}
+
+.mat-paginator {
+  border-top: 2px solid #ffd73f;
+  background: #303030;
+  color: rgb(255, 215, 63);
+}
+
+.mat-icon-button[disabled][disabled] {
+  color: rgba(255, 255, 255, 0.47)
+}
+
+mat-sidenav[_ngcontent-c0] {
+  background-color: rgb(48, 48, 48)
 }

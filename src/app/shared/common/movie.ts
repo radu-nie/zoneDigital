@@ -1,6 +1,7 @@
 import { Genre } from "./genre";
+import { OnInit } from "@angular/core";
 
-export class Movie {
+export class Movie implements OnInit {
     public id: number;
     public video: boolean;
     public vote_count: number;
@@ -18,6 +19,10 @@ export class Movie {
     public release_date: string;
 
     constructor() {
+        this.genres = [];
+    }
+
+    ngOnInit() {
         this.genres = [];
     }
 }

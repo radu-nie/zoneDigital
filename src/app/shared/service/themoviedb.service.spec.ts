@@ -1,15 +1,21 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject, async } from '@angular/core/testing';
+import { TheMovieDBService } from './themoviedb.service';
 
-import { ThemoviedbService } from './themoviedb.service';
-
-describe('ThemoviedbService', () => {
+describe('TheMovieDBService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ThemoviedbService]
+      providers: [TheMovieDBService]
     });
   });
 
-  it('should be created', inject([ThemoviedbService], (service: ThemoviedbService) => {
+  it('should be created', inject([TheMovieDBService], (service: TheMovieDBService) => {
     expect(service).toBeTruthy();
+  }));
+  it('should run #getMovies()', async((service: TheMovieDBService) => {
+    const result = service.getMovies();
+  }));
+
+  it('should run #getGeneres()', async((service: TheMovieDBService) => {
+    const result = service.getGeneres();
   }));
 });

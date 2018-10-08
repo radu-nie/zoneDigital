@@ -19,7 +19,7 @@ export class TheMovieDBService {
   }
 
   getMovies(page?: string): Observable<MovieDBResponse> {
-    return this.http.get<any>(AppSettings.THE_MOVIE_DB + 'movie/now_playing?api_key=' + AppSettings.API_KEY + '&language=en-US&page=' + page);
+    return this.http.get<MovieDBResponse>(AppSettings.THE_MOVIE_DB + 'movie/now_playing?api_key=' + AppSettings.API_KEY + '&language=en-US&page=' + page);
   }
   getGeneres(): Observable<any> {
     return this.http.get<any>(AppSettings.THE_MOVIE_DB + 'genre/movie/list?api_key=' + AppSettings.API_KEY + '&language=' + this.language);
