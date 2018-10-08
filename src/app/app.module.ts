@@ -14,7 +14,7 @@ import { HttpModule } from '@angular/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
-import { MoviesComponent } from './modules/movies/movies.component';
+import { MoviesComponent, MovieDetailsDialog } from './modules/movies/movies.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material';
 import { FiltersComponent } from './modules/filters/filters.component';
@@ -23,6 +23,7 @@ import { GetGenreNamePipe } from './shared/pipe/getGenreName';
   declarations: [
     AppComponent,
     MoviesComponent,
+    MovieDetailsDialog,
     FiltersComponent,
     GetGenreNamePipe
   ],
@@ -35,6 +36,7 @@ import { GetGenreNamePipe } from './shared/pipe/getGenreName';
     BrowserAnimationsModule,
     MatButtonModule
   ],
+  entryComponents: [MoviesComponent, MovieDetailsDialog],
   providers: [HttpClient],
   bootstrap: [AppComponent]
 })

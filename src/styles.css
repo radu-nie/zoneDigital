@@ -8,7 +8,7 @@ html {
 
 .mat-drawer-content {
   background-color: #111111;
-  background-image: url('assets/img/low_theatre.jpg');
+  background-image: url('assets/img/med_theatre.jpg');
   background-repeat: no-repeat, repeat;
   background-size: cover;
 }
@@ -76,4 +76,9 @@ mat-sidenav[_ngcontent-c0] {
 
 mat-sidenav[_ngcontent-c0] {
   background-color: rgb(48, 48, 48)
+}
+
+.mat-dialog-container {
+  background: #212121;
+  color: rgb(255, 215, 63);
 }

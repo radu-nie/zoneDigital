@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
     this.pageSize = 20;
     this.ratingFilterValue = 3;
 
-    this.sidenavOpened = true;
+    this.sidenavOpened = false;
   }
 
   ngOnInit() {
@@ -49,6 +49,7 @@ export class AppComponent implements OnInit {
   // REMEMBER: PAGINATION does not include filtering!! not suported by api
   getMovies(pageEvent: PageEvent) {
     this.tmdbService.getMovies(pageEvent ? (pageEvent.pageIndex + 1 + '') : null).subscribe(data => {
+      this.uniqueGenresIds = [];
       // Add genres to movies
       data.results.map(resp => {
         resp.genres = [];
@@ -73,11 +74,12 @@ export class AppComponent implements OnInit {
   }
 
   getGenres() {
+    this.genres = [];
     this.tmdbService.getGeneres().subscribe(data => {
       // Select only available movie genres from dataset
       let uniqueGenres = data.genres.filter(element => {
         // Check for existence in movie object -> genre_ids
-        return this.uniqueGenresIds.includes(element.id);
+        return this.uniqueGenresIds.indexOf(element.id) != -1;
       });
       // Setter for genres -> also triggers input on filters check filters component
       this.genres = uniqueGenres;
@@ -159,7 +161,7 @@ export class AppComponent implements OnInit {
 
   // Helper methods
   intersect(heystackArray, keyArray): Array<any> {
-    return heystackArray.filter(arr => { return keyArray.includes(arr) })
+    return heystackArray.filter(arr => { return keyArray.indexOf(arr) != -1 })
   }
 
   sort(arr: any[], property: string) {

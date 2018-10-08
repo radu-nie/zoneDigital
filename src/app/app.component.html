@@ -1,6 +1,7 @@
-<button mat-raised-button class="filters-btn" color="accent" (click)="sidenavOpened = !sidenavOpened">
+<button mat-raised-button class="filters-btn" [class.filters-opened]="sidenavOpened" color="accent" (click)="sidenavOpened = !sidenavOpened">
   {{sidenavOpened ? 'Close' : 'Open'}} filters
 </button>
+
 <mat-sidenav-container class="example-container" fullscreen>
   <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="true" [fixedTopGap]="0" [opened]="sidenavOpened"
     [fixedBottomGap]="0">
@@ -9,16 +10,10 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <!-- <mat-grid-list cols="1" rowHeight="80" gutterSize="20">
-      <mat-grid-tile [rowspan]="1" [colspan]="1" class="mat-grid-title">
-        
-      </mat-grid-tile>
-    </mat-grid-list> -->
-
-
     <app-movies [moviesList]="moviesListFiltered" [genresList]="genres"></app-movies>
 
     <mat-paginator [length]="length" [pageSize]="pageSize" (page)="pageEvent = getMovies($event)">
+
     </mat-paginator>
   </mat-sidenav-content>
 

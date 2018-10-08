@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges, Inject } from '@angular/core';
 import { Movie } from '../../shared/common/movie';
 import { AppSettings } from '../../constants/constants';
 import { Genre } from '../../shared/common/genre';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class MoviesComponent implements OnInit {
     return this.genres;
   }
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.movies = [];
     this.genres = [];
   }
@@ -57,4 +58,21 @@ export class MoviesComponent implements OnInit {
       })
     }
   }
+  openDialog(movieData) {
+    this.dialog.open(MovieDetailsDialog, {
+      data: {
+        title: movieData.title,
+        overview: movieData.overview,
+        backdrop_path: this.moviedbImageUrl + movieData.backdrop_path
+      }
+    });
+  }
+}
+
+@Component({
+  selector: 'movie-details',
+  templateUrl: 'movie-details.html',
+})
+export class MovieDetailsDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Movie) { }
 }

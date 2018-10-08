@@ -5,7 +5,7 @@
 }
 
 .example-sidenav {
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   width: 200px;
@@ -74,4 +74,9 @@ mat-slider {
   z-index: 2;
   left: 40px;
   top: 15px;
+  transition: left .3s ease;
+}
+
+.filters-opened {
+  left: 240px;
 }
