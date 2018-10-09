@@ -21,4 +21,7 @@ app.get('/', function (req, res) {
 
 app.listen(port, function () {
   console.log('Movie DB is running on port: ' + port);
+}, function (err) {
+  if (err) throw err
+  console.log(`server listening on ${port}`)
 });
