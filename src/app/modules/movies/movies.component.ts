@@ -14,8 +14,8 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
 
 export class MoviesComponent implements OnInit {
-  private movies: Array<Movie>;
-  private genres: Array<Genre>;
+  public movies: Array<Movie>;
+  public genres: Array<Genre>;
   public moviedbImageUrl = AppSettings.MOVIEDB_IMAGE_URL;
 
   @Input()

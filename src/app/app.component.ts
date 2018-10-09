@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   public length: number;
   public pageSize: number;
   public ratingFilterValue: number;
+  public pageEvent: PageEvent;
 
   private uniqueGenresIds: Array<number>;
 

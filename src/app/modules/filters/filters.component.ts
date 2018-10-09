@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./filters.component.css']
 })
 export class FiltersComponent implements OnInit {
-  private filters: any;
+  public filters: any;
   public ratingValue: number;
   @Output() filtersEvent = new EventEmitter<any>();
   @Output() ratingFilter = new EventEmitter<any>();
