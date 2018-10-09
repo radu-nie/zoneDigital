@@ -1,7 +1,7 @@
 # Movie listings challenge done 🤗
-
 [![Part of Zone Frontend][zone-fe-image]][zone-fe-url]
 
+* TEST URL: (https://movie-db-nie.herokuapp.com)
 > Application is developed using Angular Typescript Framework with Material and Flex, and as an extra we have pagination with filtered genres 
 
 ## Instructions
