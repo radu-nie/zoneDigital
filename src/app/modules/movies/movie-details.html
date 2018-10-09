@@ -1,9 +1,8 @@
 <div mat-dialog-content class="movie-details">
-
   <div class="movie-container">
-    <img [src]="data.backdrop_path">
     <h3 class="title">{{data.title}}</h3>
     <p class="overview">{{data.overview}}</p>
+    <img [src]="data.backdrop_path">
   </div>
 </div>
 <div mat-dialog-actions align="end">
