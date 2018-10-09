@@ -82,3 +82,21 @@ mat-sidenav[_ngcontent-c0] {
   background: #212121;
   color: rgb(255, 215, 63);
 }
+
+.movie-details .movie-container {
+  text-align: center;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  font-size: 14px;
+}
+
+.movie-details .movie-container img {
+  width: 100%;
+  max-width: 40rem;
+}
+
+.movie-details .movie-container .title {}
+
+.movie-details .movie-container .overview {
+  color: rgb(177, 160, 94);
+}
